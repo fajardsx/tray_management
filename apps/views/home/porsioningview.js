@@ -35,22 +35,10 @@ const btnlist = [
   },
 ];
 
-export class HomeScreen extends Component {
+export class PorsioningScreen extends Component {
   //EVENT
   toQrCode() {
     this.props.navigation.navigate(KEY_ROUTE.QR_SCREEN);
-  }
-  toScreen(id) {
-    switch (id) {
-      case 0:
-        return this.props.navigation.navigate(KEY_ROUTE.PORSIONING_SCREEN);
-      case 1:
-        return this.props.navigation.navigate(KEY_ROUTE.TRAYSET_SCREEN);
-      case 2:
-        return this.props.navigation.navigate(KEY_ROUTE.TROLEY_LIST_SCREEN);
-      case 3:
-        return this.props.navigation.navigate(KEY_ROUTE.PICKUP_SCREEN);
-    }
   }
   //API
 
@@ -59,16 +47,8 @@ export class HomeScreen extends Component {
     return (
       <View style={styles.containerDimension}>
         <Headers />
+        <Text>{'Porsioning'}</Text>
         <View>
-          <FlatList
-            numColumns={2}
-            extraData={this.state}
-            data={btnlist}
-            renderItem={this.renderBtn}
-            keyExtractor={(item, index) => {
-              return index.toString();
-            }}
-          />
           <View style={{marginTop: '10%', alignItems: 'center'}}>
             <Buttons
               style={{
@@ -84,9 +64,7 @@ export class HomeScreen extends Component {
   }
   renderBtn = ({item, index}) => (
     <View style={[styles.container, styles.centercontainer, {borderWidth: 0}]}>
-      <TouchableOpacity
-        onPress={() => this.toScreen(index)}
-        style={{borderWidth: 1, margin: 5, borderRadius: 10}}>
+      <TouchableOpacity style={{borderWidth: 1, margin: 5, borderRadius: 10}}>
         <View style={{width: moderateScale(130), aspectRatio: 1}}>
           <Text>{item.title}</Text>
         </View>
@@ -99,4 +77,4 @@ const mapStateToProps = state => ({});
 
 const mapDispatchToProps = {};
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(PorsioningScreen);

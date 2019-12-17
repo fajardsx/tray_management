@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "662668594411",
+    "firebase_url": "https://fajar-testdev.firebaseio.com",
+    "project_id": "fajar-testdev",
+    "storage_bucket": "fajar-testdev.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:662668594411:android:71020ecaf38a32e9acc2ae",
+        "android_client_info": {
+          "package_name": "com.edpmp_tray_management"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "662668594411-fo9db8tb7456nopl0otkemqmd16u02ul.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.edpmp_tray_management",
+            "certificate_hash": "2ca0258c068642dfea16800a8c1ddd9d6b2a720e"
+          }
+        },
+        {
+          "client_id": "662668594411-d12ac8ilsfscgv7ude2o1dvghpgbpp87.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDqcclU_zY1lTr1Wr50ugIekkNYVj8rPU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "662668594411-d12ac8ilsfscgv7ude2o1dvghpgbpp87.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -10,6 +10,11 @@ import {moderateScale} from '../styles/scaling';
 import InitScreen from '../views';
 import TitleScreen from '../views/titles/titleview';
 import {HomeScreen} from './../views/home/index';
+import QRCamera from '../views/qrcodecamera';
+import {PorsioningScreen} from '../views/home/porsioningview';
+import {TraySetScreen} from '../views/home/trysetview';
+import {TroleyScreen} from './../views/home/trolylistview';
+import {PickupScreen} from './../views/home/pickupview';
 
 const TitleScene = createStackNavigator(
   {
@@ -26,6 +31,21 @@ const InAppScene = createStackNavigator(
   {
     home: {
       screen: HomeScreen,
+    },
+    porsioning: {
+      screen: PorsioningScreen,
+    },
+    troley: {
+      screen: TroleyScreen,
+    },
+    tryset: {
+      screen: TraySetScreen,
+    },
+    pickup: {
+      screen: PickupScreen,
+    },
+    qrscan: {
+      screen: QRCamera,
     },
   },
   {
