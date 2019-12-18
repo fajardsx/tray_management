@@ -53,4 +53,13 @@ export default {
   buttonTouchable: {
     padding: 16,
   },
+  titles: {
+    fontSize: moderateScale(18),
+    fontWeight: 'bold',
+  },
+  category: {
+    fontSize: moderateScale(20),
+    fontWeight: 'bold',
+    fontFamily: 'Open-sans',
+  },
 };

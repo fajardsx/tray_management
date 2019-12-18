@@ -28,7 +28,7 @@ export class TraySetScreen extends Component {
     return (
       <View style={styles.containerDimension}>
         <Headers />
-        <Text>{'Tray Set'}</Text>
+        <Text style={[styles.category]}>{'Tray Set'}</Text>
         <View>
           <View style={{marginTop: '10%', alignItems: 'center'}}></View>
         </View>

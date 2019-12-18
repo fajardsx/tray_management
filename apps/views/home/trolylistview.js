@@ -28,7 +28,7 @@ export class TroleyScreen extends Component {
     return (
       <View style={styles.containerDimension}>
         <Headers />
-        <Text>{'Troley List'}</Text>
+        <Text style={[styles.category]}>{'Troley List'}</Text>
         <View>
           <View style={{marginTop: '10%', alignItems: 'center'}}></View>
         </View>

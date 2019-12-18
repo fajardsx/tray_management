@@ -14,48 +14,43 @@ import {moderateScale} from '../../styles/scaling';
 import Buttons from '../../components/Buttons';
 import {convertWidth} from '../../config/utils';
 import KEY_ROUTE from './../../route/keyroute';
-import Headers from '../../components/Headers';
-
-const btnlist = [
-  {
-    id: 0,
-    title: 'Porsioning',
-  },
-  {
-    id: 1,
-    title: 'Delivery Tray',
-  },
-  {
-    id: 2,
-    title: 'Receiving Tray',
-  },
-  {
-    id: 3,
-    title: 'Pickup Tray',
-  },
-];
+import Headers, {Subtitles} from '../../components/Headers';
+import Iconqr from '../../assets/images/icons/qricon.svg';
 
 export class PorsioningScreen extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      data: null,
+    };
+  }
+
   //EVENT
   toQrCode() {
-    this.props.navigation.navigate(KEY_ROUTE.QR_SCREEN);
+    //this.props.navigation.navigate(KEY_ROUTE.QR_SCREEN);
+    this.props.navigation.navigate(KEY_ROUTE.TRAYSET_SCREEN);
   }
+  onDone(data) {}
   //API
 
   //RENDER
   render() {
     return (
       <View style={styles.containerDimension}>
-        <Headers />
-        <Text>{'Porsioning'}</Text>
+        {Subtitles('Porsioning')}
         <View>
           <View style={{marginTop: '10%', alignItems: 'center'}}>
             <Buttons
               style={{
                 width: convertWidth(80),
+                paddingVertical: 20,
+                flexDirection: 'row',
+                justifyContent: 'space-around',
               }}
               onPressButton={this.toQrCode.bind(this)}>
-              <Text>Scan Barcode/QR-Code</Text>
+              <Iconqr width={moderateScale(25)} height={moderateScale(25)} />
+              <Text>Scan e-Ticket</Text>
             </Buttons>
           </View>
         </View>

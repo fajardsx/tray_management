@@ -8,13 +8,18 @@ import {
 } from 'react-native';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {styles} from '../../styles';
+import {styles, colors} from '../../styles';
 import Constants from '../../config/constant';
 import {moderateScale} from '../../styles/scaling';
 import Buttons from '../../components/Buttons';
 import {convertWidth} from '../../config/utils';
 import KEY_ROUTE from './../../route/keyroute';
 import Headers from '../../components/Headers';
+
+import IconPorsioning from '../../assets/images/icons/porsioningicon.svg';
+import IconDelivery from '../../assets/images/icons/deliveryicon.svg';
+import IconRecive from '../../assets/images/icons/receivingicon.svg';
+import IconPickup from '../../assets/images/icons/pickupicon.svg';
 
 const btnlist = [
   {
@@ -59,7 +64,7 @@ export class HomeScreen extends Component {
     return (
       <View style={styles.containerDimension}>
         <Headers />
-        <View>
+        <View style={{marginTop: moderateScale(20)}}>
           <FlatList
             numColumns={2}
             extraData={this.state}
@@ -82,13 +87,78 @@ export class HomeScreen extends Component {
       </View>
     );
   }
+  getIcon(id) {
+    const sizeIcon = 100;
+    switch (id) {
+      case 0:
+        return (
+          <IconPorsioning
+            width={moderateScale(sizeIcon * 0.8)}
+            height={moderateScale(sizeIcon * 0.8)}
+          />
+        );
+      case 1:
+        return (
+          <IconDelivery
+            width={moderateScale(sizeIcon * 0.8)}
+            height={moderateScale(sizeIcon * 0.8)}
+          />
+        );
+      case 2:
+        return (
+          <IconRecive
+            width={moderateScale(sizeIcon)}
+            height={moderateScale(sizeIcon)}
+          />
+        );
+      case 3:
+        return (
+          <IconPickup
+            width={moderateScale(sizeIcon)}
+            height={moderateScale(sizeIcon)}
+          />
+        );
+    }
+  }
   renderBtn = ({item, index}) => (
     <View style={[styles.container, styles.centercontainer, {borderWidth: 0}]}>
       <TouchableOpacity
         onPress={() => this.toScreen(index)}
-        style={{borderWidth: 1, margin: 5, borderRadius: 10}}>
-        <View style={{width: moderateScale(130), aspectRatio: 1}}>
-          <Text>{item.title}</Text>
+        style={{
+          borderWidth: 1,
+          margin: 5,
+          borderRadius: 10,
+          overflow: 'hidden',
+        }}>
+        <View
+          style={{
+            width: moderateScale(140),
+            height: moderateScale(140),
+            //justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+          <View style={{marginTop: 10}}>{this.getIcon(index)}</View>
+
+          <View
+            style={[
+              {
+                width: '100%',
+                paddingLeft: moderateScale(10),
+                position: 'absolute',
+                bottom: 0,
+                backgroundColor: colors.background.COLOR_PRIMARY_2,
+              },
+            ]}>
+            <Text
+              style={[
+                {
+                  paddingVertical: moderateScale(10),
+                  fontSize: moderateScale(15),
+                },
+              ]}>
+              {item.title}
+            </Text>
+          </View>
         </View>
       </TouchableOpacity>
     </View>
