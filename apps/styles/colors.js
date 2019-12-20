@@ -1,10 +1,11 @@
 export default {
   main: {
     COLOR_PRIMARY_1: '#fff',
-    COLOR_PRIMARY_2: '#fff',
+    COLOR_PRIMARY_2: '#009ABB',
     COLOR_PRIMARY_3: '#bfbfbf',
     COLOR_PRIMARY_4: '#3d83fc',
     COLOR_PRIMARY_5: '#eb3013',
+    COLOR_PRIMARY_6: '#007C92',
   },
   background: {
     COLOR_PRIMARY_1: '#fff',
@@ -18,5 +19,9 @@ export default {
   },
   lines: {
     COLOR_LINE_STEP: '#3d83fc',
+  },
+  textcolor: {
+    COLOR_TEXT_1: '#fff',
+    COLOR_TEXT_2: '#555555',
   },
 };
