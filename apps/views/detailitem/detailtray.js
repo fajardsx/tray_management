@@ -2,10 +2,11 @@ import React, {Component} from 'react';
 import {
   View,
   Text,
+  Picker,
   FlatList,
   TouchableHighlight,
-  ScrollView,
   TouchableOpacity,
+  ScrollView,
 } from 'react-native';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
@@ -16,9 +17,6 @@ import Buttons from '../../components/Buttons';
 import {convertWidth, formatDate} from '../../config/utils';
 import KEY_ROUTE from '../../route/keyroute';
 import Headers, {Subtitles} from '../../components/Headers';
-import IconCheck from '../../assets/images/icons/checkicon.svg';
-import IconPlus from '../../assets/images/icons/iconplus.svg';
-import IconMinus from '../../assets/images/icons/iconminus.svg';
 import Iconqr from '../../assets/images/icons/qricon.svg';
 const foodlist = [
   {
@@ -54,7 +52,7 @@ const cuteliselist = [
     count: 0,
   },
 ];
-export class TraySetScreen extends Component {
+export class TaryDetailScreen extends Component {
   constructor(props) {
     super(props);
 
@@ -68,30 +66,12 @@ export class TraySetScreen extends Component {
   toQrCode() {
     this.props.navigation.navigate(KEY_ROUTE.QR_SCREEN);
   }
-  updateCheck(id) {
-    const {datas} = this.state;
-    let currentdata = datas.findIndex(res => {
+  getTroleyName = id => {
+    const nametroly = troleylist.find(res => {
       return res.id == id;
     });
-
-    if (currentdata > -1) {
-      let tempdata = Object.assign([], datas);
-      tempdata[currentdata].isCheck = !tempdata[currentdata].isCheck;
-      this.setState({datas: tempdata});
-    }
-  }
-  updateCutelies(id, updateCount) {
-    const {datasCutelies} = this.state;
-    let currentdata = datasCutelies.findIndex(res => {
-      return res.id == id;
-    });
-
-    if (currentdata > -1) {
-      let tempdata = Object.assign([], datasCutelies);
-      tempdata[currentdata].count = tempdata[currentdata].count + updateCount;
-      this.setState({datasCutelies: tempdata});
-    }
-  }
+    return nametroly;
+  };
   //API
 
   //RENDER
@@ -99,10 +79,10 @@ export class TraySetScreen extends Component {
     const {datas, datasCutelies} = this.state;
     return (
       <View style={styles.containerDimension}>
-        {Subtitles('Tray Set')}
+        {Subtitles('Tray Detail')}
         <ScrollView
-          style={{flex: 1, marginBottom: moderateScale(30)}}
-          contentContainerStyle={{flexGrow: 2}}>
+          style={{flex: 1, marginBottom: 10}}
+          contentContainerStyle={{flexGrow: 1}}>
           <View style={{paddingVertical: 5}}>
             <Text
               style={{
@@ -144,7 +124,7 @@ export class TraySetScreen extends Component {
               return this.renderCutlistItem(res);
             })}
           </View>
-          <View style={{flexDirection: 'row', paddingVertical: 10}}>
+          {/* <View style={{flexDirection: 'row', paddingVertical: 10}}>
             <View
               style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
               <Text style={{fontSize: moderateScale(19)}}>Troley</Text>
@@ -166,7 +146,7 @@ export class TraySetScreen extends Component {
               <Text style={{fontSize: moderateScale(19)}}>Rack</Text>
               <Buttons
                 style={{
-                  width: convertWidth(40),
+                  width: convertWidth(30),
                   paddingVertical: 20,
                   flexDirection: 'row',
                   justifyContent: 'space-around',
@@ -177,32 +157,12 @@ export class TraySetScreen extends Component {
                 <Text>Scan</Text>
               </Buttons>
             </View>
-          </View>
-          <View style={{alignItems: 'center'}}>
-            <Buttons
-              style={{
-                width: convertWidth(80),
-                marginTop: 50,
-              }}
-              //onPressButton={this.onTryLogin.bind(this)}
-            >
-              <Text>Done</Text>
-            </Buttons>
-            <Buttons
-              style={{
-                width: convertWidth(80),
-                marginTop: 10,
-              }}
-              //onPressButton={this.onTryLogin.bind(this)}
-            >
-              <Text>Cancel</Text>
-            </Buttons>
-          </View>
+          </View> */}
+          <View style={{height: moderateScale(20)}} />
         </ScrollView>
       </View>
     );
   }
-
   renderForm = (title, value) => (
     <View>
       <Text
@@ -229,26 +189,6 @@ export class TraySetScreen extends Component {
         borderBottomWidth: 0.5,
       }}>
       <Text style={{fontSize: moderateScale(19)}}>{data.title}</Text>
-      <TouchableOpacity
-        onPress={() => this.updateCheck(data.id)}
-        style={{
-          borderWidth: 2,
-          width: moderateScale(30),
-          borderRadius: 5,
-          justifyContent: 'center',
-          alignItems: 'center',
-          borderColor: colors.main.COLOR_PRIMARY_2,
-          aspectRatio: 1,
-        }}>
-        {data.isCheck == true && (
-          <IconCheck
-            width={moderateScale(22)}
-            height={moderateScale(22)}
-            fill={colors.main.COLOR_PRIMARY_2}
-          />
-        )}
-        {data.isCheck == false && <View />}
-      </TouchableOpacity>
     </View>
   );
   renderCutlistItem = data => (
@@ -265,26 +205,6 @@ export class TraySetScreen extends Component {
         style={{
           flexDirection: 'row',
         }}>
-        {data.count > 0 && (
-          <TouchableOpacity
-            onPress={() => this.updateCutelies(data.id, -1)}
-            style={{
-              borderWidth: 2,
-              width: moderateScale(30),
-              borderRadius: 5,
-              justifyContent: 'center',
-              alignItems: 'center',
-              borderColor: colors.main.COLOR_PRIMARY_2,
-              aspectRatio: 1,
-            }}>
-            <IconMinus
-              width={moderateScale(22)}
-              height={moderateScale(22)}
-              //fill={colors.main.COLOR_PRIMARY_2}
-            />
-          </TouchableOpacity>
-        )}
-
         <Text
           style={{
             paddingHorizontal: moderateScale(20),
@@ -292,23 +212,6 @@ export class TraySetScreen extends Component {
           }}>
           {data.count}
         </Text>
-        <TouchableOpacity
-          onPress={() => this.updateCutelies(data.id, 1)}
-          style={{
-            borderWidth: 2,
-            width: moderateScale(30),
-            borderRadius: 5,
-            justifyContent: 'center',
-            alignItems: 'center',
-            borderColor: colors.main.COLOR_PRIMARY_2,
-            aspectRatio: 1,
-          }}>
-          <IconPlus
-            width={moderateScale(22)}
-            height={moderateScale(22)}
-            //fill={colors.main.COLOR_PRIMARY_2}
-          />
-        </TouchableOpacity>
       </View>
     </View>
   );
@@ -318,4 +221,4 @@ const mapStateToProps = state => ({});
 
 const mapDispatchToProps = {};
 
-export default connect(mapStateToProps, mapDispatchToProps)(TraySetScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(TaryDetailScreen);

@@ -55,7 +55,9 @@ export default class Forminput extends PureComponent {
           this.props.stylecontainer ? this.props.stylecontainer : null,
         ]}>
         {this.props.title && (
-          <Text>{this.props.title ? this.props.title : ''}</Text>
+          <Text style={this.props.labelStyle}>
+            {this.props.title ? this.props.title : ''}
+          </Text>
         )}
 
         <TextInput

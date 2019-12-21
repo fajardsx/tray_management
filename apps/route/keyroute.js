@@ -7,4 +7,5 @@ export default KEY_ROUTE = {
   TRAYSET_SCREEN: 'tryset',
   TROLEY_LIST_SCREEN: 'troley',
   PICKUP_SCREEN: 'pickup',
+  TRAY_DETAIL: 'traydetail',
 };

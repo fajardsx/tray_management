@@ -50,7 +50,7 @@ export class HomeScreen extends Component {
       case 0:
         return this.props.navigation.navigate(KEY_ROUTE.PORSIONING_SCREEN);
       case 1:
-        return this.props.navigation.navigate(KEY_ROUTE.TRAYSET_SCREEN);
+        return this.props.navigation.navigate(KEY_ROUTE.TROLEY_LIST_SCREEN);
       case 2:
         return this.props.navigation.navigate(KEY_ROUTE.TROLEY_LIST_SCREEN);
       case 3:
@@ -95,6 +95,7 @@ export class HomeScreen extends Component {
           <IconPorsioning
             width={moderateScale(sizeIcon * 0.8)}
             height={moderateScale(sizeIcon * 0.8)}
+            fill={colors.main.COLOR_PRIMARY_2}
           />
         );
       case 1:
@@ -102,6 +103,7 @@ export class HomeScreen extends Component {
           <IconDelivery
             width={moderateScale(sizeIcon * 0.8)}
             height={moderateScale(sizeIcon * 0.8)}
+            fill={colors.main.COLOR_PRIMARY_2}
           />
         );
       case 2:
@@ -109,6 +111,7 @@ export class HomeScreen extends Component {
           <IconRecive
             width={moderateScale(sizeIcon)}
             height={moderateScale(sizeIcon)}
+            fill={colors.main.COLOR_PRIMARY_2}
           />
         );
       case 3:
@@ -116,6 +119,7 @@ export class HomeScreen extends Component {
           <IconPickup
             width={moderateScale(sizeIcon)}
             height={moderateScale(sizeIcon)}
+            fill={colors.main.COLOR_PRIMARY_2}
           />
         );
     }
@@ -125,7 +129,8 @@ export class HomeScreen extends Component {
       <TouchableOpacity
         onPress={() => this.toScreen(index)}
         style={{
-          borderWidth: 1,
+          borderWidth: 5,
+          borderColor: colors.main.COLOR_PRIMARY_6,
           margin: 5,
           borderRadius: 10,
           overflow: 'hidden',
@@ -146,7 +151,7 @@ export class HomeScreen extends Component {
                 paddingLeft: moderateScale(10),
                 position: 'absolute',
                 bottom: 0,
-                backgroundColor: colors.background.COLOR_PRIMARY_2,
+                backgroundColor: colors.main.COLOR_PRIMARY_2,
               },
             ]}>
             <Text
@@ -154,6 +159,7 @@ export class HomeScreen extends Component {
                 {
                   paddingVertical: moderateScale(10),
                   fontSize: moderateScale(15),
+                  color: colors.textcolor.COLOR_TEXT_1,
                 },
               ]}>
               {item.title}

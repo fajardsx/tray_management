@@ -15,6 +15,7 @@ import {PorsioningScreen} from '../views/home/porsioningview';
 import {TraySetScreen} from '../views/home/trysetview';
 import {TroleyScreen} from './../views/home/trolylistview';
 import {PickupScreen} from './../views/home/pickupview';
+import {TaryDetailScreen} from '../views/detailitem/detailtray';
 
 const TitleScene = createStackNavigator(
   {
@@ -40,6 +41,9 @@ const InAppScene = createStackNavigator(
     },
     tryset: {
       screen: TraySetScreen,
+    },
+    traydetail: {
+      screen: TaryDetailScreen,
     },
     pickup: {
       screen: PickupScreen,

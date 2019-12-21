@@ -10,13 +10,19 @@ export default Headers = () => {
     <View
       style={[
         {
+          backgroundColor: colors.main.COLOR_PRIMARY_2,
           paddingHorizontal: moderateScale(10),
           paddingVertical: moderateScale(20),
-          borderBottomWidth: 1,
+          borderBottomWidth: 2,
+          borderColor: colors.main.COLOR_PRIMARY_6,
         },
       ]}>
-      <Text style={[styles.titles]}>{Constants.NAME_APPS}</Text>
-      <Text style={[styles.titles]}>{'TRAY MANAGEMENT'}</Text>
+      <Text style={[styles.titles, {color: colors.textcolor.COLOR_TEXT_1}]}>
+        {Constants.NAME_APPS}
+      </Text>
+      <Text style={[styles.titles, {color: colors.textcolor.COLOR_TEXT_1}]}>
+        {'TRAY MANAGEMENT'}
+      </Text>
     </View>
   );
 };

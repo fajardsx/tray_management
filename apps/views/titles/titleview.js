@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {View, Text, SafeAreaView, KeyboardAvoidingView} from 'react-native';
-import {styles} from '../../styles';
+import {styles, colors} from '../../styles';
 import Constants from '../../config/constant';
 import Forminput from '../../components/Forminput';
 import {convertWidth} from './../../config/utils';
@@ -33,7 +33,11 @@ class TitleScreen extends Component {
     const {usernametxt, passtxt} = this.state;
     return (
       <View style={styles.containerDimension}>
-        <SafeAreaView style={[styles.container]}>
+        <SafeAreaView
+          style={[
+            styles.container,
+            {backgroundColor: colors.main.COLOR_PRIMARY_2},
+          ]}>
           <KeyboardAvoidingView
             behavior={'position'}
             style={{alignItems: 'center'}}>
@@ -42,15 +46,35 @@ class TitleScreen extends Component {
                 styles.centercontainer,
                 {paddingVertical: moderateScale(100)},
               ]}>
-              <Text>{Constants.NAME_APPS}</Text>
-              <Text>{'TRAY MANAGEMENT'}</Text>
+              <Text
+                style={{
+                  fontSize: moderateScale(25),
+                  color: colors.textcolor.COLOR_TEXT_1,
+                }}>
+                {Constants.NAME_APPS}
+              </Text>
+              <Text
+                style={{
+                  fontSize: moderateScale(25),
+                  color: colors.textcolor.COLOR_TEXT_1,
+                }}>
+                {'TRAY MANAGEMENT'}
+              </Text>
             </View>
 
             <Forminput
               stylecontainer={{flex: 0, width: convertWidth(80), margin: 10}}
               defaultText={usernametxt}
               onChangeText={this.onChangeUserNameInput}
-              styleinput={{borderBottomWidth: 1}}
+              labelStyle={{
+                color: colors.textcolor.COLOR_TEXT_1,
+                fontSize: moderateScale(17),
+              }}
+              styleinput={{
+                borderBottomWidth: 1,
+                color: colors.textcolor.COLOR_TEXT_1,
+                fontSize: moderateScale(15),
+              }}
               title={'Username'}
             />
             <Forminput
@@ -58,7 +82,15 @@ class TitleScreen extends Component {
               stylecontainer={{flex: 0, width: convertWidth(80), margin: 10}}
               defaultText={passtxt}
               onChangeText={this.onChangePasswordInput}
-              styleinput={{borderBottomWidth: 1}}
+              labelStyle={{
+                color: colors.textcolor.COLOR_TEXT_1,
+                fontSize: moderateScale(17),
+              }}
+              styleinput={{
+                borderBottomWidth: 1,
+                color: colors.textcolor.COLOR_TEXT_1,
+                fontSize: moderateScale(15),
+              }}
               title={'Password'}
             />
           </KeyboardAvoidingView>
@@ -66,9 +98,16 @@ class TitleScreen extends Component {
             <Buttons
               style={{
                 width: convertWidth(80),
+                backgroundColor: colors.main.COLOR_PRIMARY_6,
               }}
               onPressButton={this.onTryLogin.bind(this)}>
-              <Text>Submit</Text>
+              <Text
+                style={{
+                  fontSize: moderateScale(18),
+                  color: colors.textcolor.COLOR_TEXT_1,
+                }}>
+                Submit
+              </Text>
             </Buttons>
           </View>
         </SafeAreaView>

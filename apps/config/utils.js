@@ -6,7 +6,8 @@ import {
   Vibration,
   ActivityIndicator,
 } from 'react-native';
-
+import moment from 'moment';
+import 'moment/locale/id';
 import Toast from 'react-native-root-toast';
 import {
   heightPercentageToDP as sh,
@@ -63,6 +64,10 @@ export function callVibrate() {
     clearTimeout(limit);
   }, vibrateduration);
   return limit;
+}
+//date format
+export function formatDate(_target, format = 'DD MMMM YYYY') {
+  return moment(_target).format(format);
 }
 //COMMAND
 export function findCommad(id) {

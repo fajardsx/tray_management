@@ -6,6 +6,9 @@ export default {
     COLOR_PRIMARY_4: '#3d83fc',
     COLOR_PRIMARY_5: '#eb3013',
     COLOR_PRIMARY_6: '#007C92',
+    COLOR_PRIMARY_7: '#AABEC6',
+    COLOR_PRIMARY_8: '#B96D12',
+    COLOR_PRIMARY_9: '#b7ce97',
   },
   background: {
     COLOR_PRIMARY_1: '#fff',

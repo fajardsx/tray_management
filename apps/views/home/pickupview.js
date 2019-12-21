@@ -14,7 +14,7 @@ import {moderateScale} from '../../styles/scaling';
 import Buttons from '../../components/Buttons';
 import {convertWidth} from '../../config/utils';
 import KEY_ROUTE from '../../route/keyroute';
-import Headers from '../../components/Headers';
+import Headers, {Subtitles} from '../../components/Headers';
 
 export class PickupScreen extends Component {
   //EVENT
@@ -27,8 +27,7 @@ export class PickupScreen extends Component {
   render() {
     return (
       <View style={styles.containerDimension}>
-        <Headers />
-        <Text>{'Pick Up'}</Text>
+        {Subtitles('Pick Up')}
         <View>
           <View style={{marginTop: '10%', alignItems: 'center'}}></View>
         </View>
