@@ -110,7 +110,8 @@ export class TraySetScreen extends Component {
                 fontSize: moderateScale(15),
                 color: colors.textcolor.COLOR_TEXT_1,
                 marginTop: 10,
-                paddingVertical: moderateScale(5),
+                paddingLeft: moderateScale(10),
+                paddingVertical: moderateScale(7),
               }}>
               {'Date :' + formatDate(new Date())}
             </Text>

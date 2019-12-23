@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {styles} from '../../styles';
+import {styles, colors} from '../../styles';
 import Constants from '../../config/constant';
 import {moderateScale} from '../../styles/scaling';
 import Buttons from '../../components/Buttons';
@@ -16,6 +16,7 @@ import {convertWidth} from '../../config/utils';
 import KEY_ROUTE from './../../route/keyroute';
 import Headers, {Subtitles} from '../../components/Headers';
 import Iconqr from '../../assets/images/icons/qricon.svg';
+import Forminput from '../../components/Forminput';
 
 export class PorsioningScreen extends Component {
   constructor(props) {
@@ -23,10 +24,14 @@ export class PorsioningScreen extends Component {
 
     this.state = {
       data: null,
+      searchmrtxt: '',
     };
   }
 
   //EVENT
+  onChangeInput = text => {
+    this.setState({searchmrtxt: text});
+  };
   toQrCode() {
     //this.props.navigation.navigate(KEY_ROUTE.QR_SCREEN);
     this.props.navigation.navigate(KEY_ROUTE.TRAYSET_SCREEN);
@@ -36,24 +41,80 @@ export class PorsioningScreen extends Component {
 
   //RENDER
   render() {
+    const {searchmrtxt} = this.state;
     return (
       <View style={styles.containerDimension}>
         {Subtitles('Porsioning')}
         <View>
+          <View
+            style={{
+              justifyContent: 'center',
+              alignItems: 'center',
+              paddingVertical: moderateScale(10),
+              width: convertWidth(100),
+              backgroundColor: colors.main.COLOR_PRIMARY_6,
+            }}>
+            <Text
+              style={{
+                marginLeft: moderateScale(10),
+                fontSize: moderateScale(20),
+                color: colors.textcolor.COLOR_TEXT_1,
+              }}>
+              {'Scan E-Ticket'}
+            </Text>
+          </View>
           <View style={{marginTop: '10%', alignItems: 'center'}}>
             <Buttons
               style={{
                 width: convertWidth(80),
                 paddingVertical: 20,
                 flexDirection: 'row',
-                justifyContent: 'space-around',
+                justifyContent: 'center',
               }}
               onPressButton={this.toQrCode.bind(this)}>
               <Iconqr width={moderateScale(25)} height={moderateScale(25)} />
-              <Text>Scan e-Ticket</Text>
+              <Text style={{marginLeft: moderateScale(10)}}>
+                {'Scan Barcode Pasien'}
+              </Text>
             </Buttons>
+            <Text
+              style={{
+                fontSize: moderateScale(15),
+                paddingVertical: moderateScale(10),
+              }}>
+              {'Atau'}
+            </Text>
+            <Forminput
+              securetxt={true}
+              stylecontainer={{flex: 0, width: convertWidth(80), margin: 10}}
+              defaultText={searchmrtxt}
+              onChangeText={this.onChangeInput}
+              styleinput={{
+                borderWidth: 1,
+                paddingLeft: 10,
+                color: colors.textcolor.COLOR_TEXT_2,
+                fontSize: moderateScale(15),
+              }}
+              placeholder={'Input MR'}
+            />
           </View>
         </View>
+        <Buttons
+          style={{
+            alignSelf: 'center',
+            width: convertWidth(80),
+            backgroundColor: colors.main.COLOR_PRIMARY_2,
+            marginTop: moderateScale(100),
+          }}
+          onPressButton={this.toQrCode.bind(this)}>
+          <Text
+            style={{
+              color: colors.textcolor.COLOR_TEXT_1,
+              fontSize: moderateScale(18),
+            }}>
+            {'Submit'}
+          </Text>
+        </Buttons>
       </View>
     );
   }

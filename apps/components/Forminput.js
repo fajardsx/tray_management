@@ -62,6 +62,7 @@ export default class Forminput extends PureComponent {
 
         <TextInput
           keyboardType={
+           
             this.props.keyboardtype ? this.props.keyboardtype : 'default'
           }
           secureTextEntry={this.props.securetxt ? this.props.securetxt : false}

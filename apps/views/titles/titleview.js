@@ -48,6 +48,7 @@ class TitleScreen extends Component {
               ]}>
               <Text
                 style={{
+                  fontWeight: 'bold',
                   fontSize: moderateScale(25),
                   color: colors.textcolor.COLOR_TEXT_1,
                 }}>
@@ -55,6 +56,7 @@ class TitleScreen extends Component {
               </Text>
               <Text
                 style={{
+                  fontWeight: 'bold',
                   fontSize: moderateScale(25),
                   color: colors.textcolor.COLOR_TEXT_1,
                 }}>

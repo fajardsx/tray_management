@@ -5,6 +5,8 @@ import {
   FlatList,
   TouchableHighlight,
   TouchableOpacity,
+  SafeAreaView,
+  KeyboardAvoidingView,
 } from 'react-native';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
@@ -20,7 +22,9 @@ import IconPorsioning from '../../assets/images/icons/porsioningicon.svg';
 import IconDelivery from '../../assets/images/icons/deliveryicon.svg';
 import IconRecive from '../../assets/images/icons/receivingicon.svg';
 import IconPickup from '../../assets/images/icons/pickupicon.svg';
+import Forminput from '../../components/Forminput';
 
+import Iconqr from '../../assets/images/icons/qricon.svg';
 const btnlist = [
   {
     id: 0,
@@ -41,7 +45,18 @@ const btnlist = [
 ];
 
 export class HomeScreen extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      searchmrtxt: '',
+    };
+  }
+
   //EVENT
+  onChangeInput = text => {
+    this.setState({searchmrtxt: text});
+  };
   toQrCode() {
     this.props.navigation.navigate(KEY_ROUTE.QR_SCREEN);
   }
@@ -61,30 +76,51 @@ export class HomeScreen extends Component {
 
   //RENDER
   render() {
+    const {searchmrtxt} = this.state;
     return (
-      <View style={styles.containerDimension}>
-        <Headers />
-        <View style={{marginTop: moderateScale(20)}}>
-          <FlatList
-            numColumns={2}
-            extraData={this.state}
-            data={btnlist}
-            renderItem={this.renderBtn}
-            keyExtractor={(item, index) => {
-              return index.toString();
-            }}
-          />
-          <View style={{marginTop: '10%', alignItems: 'center'}}>
-            <Buttons
-              style={{
-                width: convertWidth(80),
+      <SafeAreaView style={styles.containerDimension}>
+        <KeyboardAvoidingView behavior={'position'}>
+          <Headers />
+          <View style={{marginTop: moderateScale(20)}}>
+            <FlatList
+              numColumns={2}
+              extraData={this.state}
+              data={btnlist}
+              renderItem={this.renderBtn}
+              keyExtractor={(item, index) => {
+                return index.toString();
               }}
-              onPressButton={this.toQrCode.bind(this)}>
-              <Text>Scan Barcode/QR-Code</Text>
-            </Buttons>
+            />
+            <View style={{marginTop: '10%', alignItems: 'center'}}>
+              <Buttons
+                style={{
+                  width: convertWidth(80),
+                  flexDirection: 'row',
+                  justifyContent: 'center',
+                }}
+                onPressButton={this.toQrCode.bind(this)}>
+                <Iconqr width={moderateScale(25)} height={moderateScale(25)} />
+                <Text style={{marginLeft: moderateScale(10)}}>
+                  {'Scan Barcode/QR-Code'}
+                </Text>
+              </Buttons>
+              <Forminput
+                securetxt={true}
+                stylecontainer={{flex: 0, width: convertWidth(80), margin: 10}}
+                defaultText={searchmrtxt}
+                onChangeText={this.onChangeInput}
+                styleinput={{
+                  borderWidth: 1,
+                  paddingLeft: 10,
+                  color: colors.textcolor.COLOR_TEXT_2,
+                  fontSize: moderateScale(15),
+                }}
+                placeholder={'Search MR'}
+              />
+            </View>
           </View>
-        </View>
-      </View>
+        </KeyboardAvoidingView>
+      </SafeAreaView>
     );
   }
   getIcon(id) {
