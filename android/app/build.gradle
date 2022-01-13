@@ -90,7 +90,7 @@ apply from: '../../node_modules/react-native/react.gradle'
  * Upload all the APKs to the Play Store and people will download
  * the correct one based on the CPU architecture of their device.
  */
-def enableSeparateBuildPerCPUArchitecture = true
+def enableSeparateBuildPerCPUArchitecture = false
 
 /**
  * Run Proguard to shrink the Java bytecode in release builds.
@@ -135,7 +135,9 @@ android {
         versionName '1.0'
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true
-
+        ndk {
+            abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'
+        }
         archivesBaseName = "$applicationId-v$versionCode($versionName)"
         missingDimensionStrategy 'react-native-camera', 'general', 'mlkit' //FOR REACT_NATIVE_CAMERA
     }
@@ -170,7 +172,7 @@ android {
         release {
             // Caution! In production, you need to generate your own keystore file.
             // see https://facebook.github.io/react-native/docs/signed-apk-android.
-            signingConfig signingConfigs.release
+            signingConfig signingConfigs.debug
             //shrinkResources enableProguardInReleaseBuilds
             //zipAlignEnabled enableProguardInReleaseBuilds
             //useProguard enableProguardInReleaseBuilds
