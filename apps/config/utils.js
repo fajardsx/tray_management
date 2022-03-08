@@ -116,8 +116,8 @@ export function showToast(msg) {
   return Toast.show(msg, {
     duration: Toast.durations.SHORT,
     position: Toast.positions.BOTTOM,
-    shadow: true,
-    animation: true,
+    shadow: false,
+    animation: false,
   });
 }
 //--------------------------------------------------------------------------------------------
@@ -133,7 +133,7 @@ export function loadingScreen() {
         width: convertWidth(100),
         height: convertHeight(100),
       }}>
-      <ActivityIndicator color={colors.main.COLOR_PRIMARY_4} />
+      <ActivityIndicator size={'large'} color={"#fff"} />
     </View>
   );
 }

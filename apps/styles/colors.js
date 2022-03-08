@@ -28,3 +28,7 @@ export default {
     COLOR_TEXT_2: '#555555',
   },
 };
+
+export const Colors={
+    TOAST_DANGER:'yellow'
+}

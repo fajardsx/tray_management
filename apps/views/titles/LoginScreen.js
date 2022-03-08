@@ -3,18 +3,24 @@ import {View, Text, SafeAreaView, KeyboardAvoidingView} from 'react-native';
 import {styles, colors} from '../../styles';
 import Constants from '../../config/constant';
 import Forminput from '../../components/Forminput';
-import {convertWidth} from './../../config/utils';
+import {convertWidth, loadingScreen, showToast} from './../../config/utils';
 import {moderateScale} from '../../styles/scaling';
 import Buttons from '../../components/Buttons';
 import KEY_ROUTE from './../../route/keyroute';
+import { RESTKEY } from '../../config/key';
+import { OnLoginPost } from '../../services/ApiController';
 
-class TitleScreen extends Component {
+class LoginScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
       usernametxt: '',
       passtxt: '',
+      isloading:false
     };
+  }
+  componentDidMount(){
+    console.log("API ",RESTKEY.BASE_URL)
   }
   //EVENT
   onChangeUserNameInput = text => {
@@ -23,10 +29,24 @@ class TitleScreen extends Component {
   onChangePasswordInput = text => {
     this.setState({passtxt: text});
   };
-  //API
-  onTryLogin() {
-    //success
+  onSuccessLogin(){
     this.props.navigation.navigate(KEY_ROUTE.INAPP_SCENE);
+  }
+  //API
+  async onTryLogin() {
+    try {
+      var body = new FormData();
+      body.append("email",this.state.usernametxt);
+      body.append("password",this.state.passtxt);
+      this.setState({isloading:true})
+      const result =  await OnLoginPost(body);
+      console.log("loginscreen => onTryLogin => result ",result)
+      this.setState({isloading:false})
+    } catch (error) {
+      showToast(err.toString());
+    }
+  
+    
   }
   //RENDER
   render() {
@@ -113,9 +133,13 @@ class TitleScreen extends Component {
             </Buttons>
           </View>
         </SafeAreaView>
+        {
+          this.state.isloading &&
+          loadingScreen()
+        }
       </View>
     );
   }
 }
 
-export default TitleScreen;
+export default LoginScreen;

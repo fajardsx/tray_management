@@ -8,7 +8,6 @@ import {convertHeight} from '../config/utils';
 import {moderateScale} from '../styles/scaling';
 //views
 import InitScreen from '../views';
-import TitleScreen from '../views/titles/titleview';
 import {HomeScreen} from './../views/home/index';
 import QRCamera from '../views/qrcodecamera';
 import {PorsioningScreen} from '../views/home/porsioningview';
@@ -16,15 +15,16 @@ import {TraySetScreen} from '../views/home/trysetview';
 import {TroleyScreen} from './../views/home/trolylistview';
 import {PickupScreen} from './../views/home/pickupview';
 import {TaryDetailScreen} from '../views/detailitem/detailtray';
+import LoginScreen from '../views/titles/LoginScreen';
 
 const TitleScene = createStackNavigator(
   {
-    title: {
-      screen: TitleScreen,
+    login: {
+      screen: LoginScreen,
     },
   },
   {
-    initialRouteName: 'title',
+    initialRouteName: 'login',
     headerMode: 'none',
   },
 );
