@@ -25,6 +25,15 @@ export const callAPI = async (method, uri, params, additionalHeader) => {
     ...defaultConfig,
     [dataOrParams]: params,
     withCredentials: true,
+    transitional:{
+      silentJSONParsing: false, // default value for the current Axios version
+
+      // try to parse the response string as JSON even if `responseType` is not 'json'
+      forcedJSONParsing: false,
+      
+      // throw ETIMEDOUT error instead of generic ECONNABORTED on request timeouts
+      clarifyTimeoutError: false,
+    }
   };
   //disableSSL?await callAPIUntrust(method,uri,params,additionalHeader):
   const source = axios.CancelToken.source();
@@ -34,7 +43,7 @@ export const callAPI = async (method, uri, params, additionalHeader) => {
   try {
     axios.defaults.timeout = 10000;
     const response = await axios(config);
-    //console.log("Axios result ", respons);
+    console.log("Axios result ", response);
     clearTimeout(timeout);
     return response.data;
   } catch (error) {

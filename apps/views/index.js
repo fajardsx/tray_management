@@ -21,7 +21,7 @@ class InitScreen extends PureComponent {
     this.setState({permissiongrand: true});
     console.log('token ', this.props.token);
 
-    if (this.props.token) {
+    if (this.props.token != null || this.props.user != null) {
       this.props.navigation.navigate(KEY_ROUTE.INAPP_SCENE);
     } else {
       this.props.navigation.navigate(KEY_ROUTE.TITLE_SCENE);
@@ -40,6 +40,16 @@ class InitScreen extends PureComponent {
 function mapStateToProps(state) {
   return {
     token: state.token,
+    user: state.user,
   };
 }
-export default connect(mapStateToProps)(InitScreen);
+function mapDispatchToProps(dispatch) {
+  return {
+    updateUser: (data) =>
+      dispatch({
+        type: ACTIONTYPE.UPDATE_USER,
+        value: data,
+      }),
+  };
+}
+export default connect(mapStateToProps,mapDispatchToProps)(InitScreen);

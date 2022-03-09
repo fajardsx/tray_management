@@ -9,6 +9,8 @@ import Buttons from '../../components/Buttons';
 import KEY_ROUTE from './../../route/keyroute';
 import { RESTKEY } from '../../config/key';
 import { OnLoginPost } from '../../services/ApiController';
+import { connect } from 'react-redux';
+import ACTIONTYPE from '../../redux/actions/actions';
 
 class LoginScreen extends Component {
   constructor(props) {
@@ -36,12 +38,23 @@ class LoginScreen extends Component {
   async onTryLogin() {
     try {
       var body = new FormData();
-      body.append("email",this.state.usernametxt);
+      body.append("username",this.state.usernametxt);
       body.append("password",this.state.passtxt);
       this.setState({isloading:true})
+      //body={"username":this.state.usernametxt,"password":this.state.passtxt};
       const result =  await OnLoginPost(body);
       console.log("loginscreen => onTryLogin => result ",result)
       this.setState({isloading:false})
+      if(result && result.api_message == "success"){
+          if(result.data){
+            this.props.updateUser(result.data)
+            setTimeout(() => {
+              this.onSuccessLogin()
+            }, 500);
+          }
+      }else{
+        showToast("Gagal Login")
+      }
     } catch (error) {
       showToast(err.toString());
     }
@@ -128,7 +141,7 @@ class LoginScreen extends Component {
                   fontSize: moderateScale(18),
                   color: colors.textcolor.COLOR_TEXT_1,
                 }}>
-                Submit
+                {"Submit"}
               </Text>
             </Buttons>
           </View>
@@ -142,4 +155,21 @@ class LoginScreen extends Component {
   }
 }
 
-export default LoginScreen;
+
+function mapStateToProps(state) {
+  return {
+    token: state.Token,
+    user: state.User,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    updateUser: (data) =>
+      dispatch({
+        type: ACTIONTYPE.UPDATE_USER,
+        value: data,
+      }),
+  };
+}
+export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen);

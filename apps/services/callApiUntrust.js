@@ -10,8 +10,8 @@ export const callAPIUntrust = async (method, api, params, additionalHeader) => {
     Accept: "application/json",
     "Content-Type": "multipart/form-data",
   };
-  var url = `${envApi}/${api}`;
-  //console.log('AXIOS ', url)
+  var url = `${envApi}${api}`;
+  console.log('AXIOS ', url)
 
   const headers = { ...defaultHeaders, ...additionalHeader };
   const dataOrParams = ["GET", "DELETE"].includes(method.toUpperCase()) ? "params" : "data";

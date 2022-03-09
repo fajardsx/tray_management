@@ -8,9 +8,9 @@ class Constants {
   static SERVER_APP_VERSION = '0.0.1';
   static FORCE_UPDATE = 'no';
   //API METHOD
-  static P = 'POST';
-  static G = 'GET';
-  static PU = 'PUTS';
+  static P = 'post';
+  static G = 'get';
+  static PU = 'puts';
 
   //LOCALE
   static ID = 'id-IN';

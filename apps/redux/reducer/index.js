@@ -4,7 +4,7 @@ import MODAL from '../model/index';
 const initState = {
   isFirst: true,
   token: null,
-  user: MODAL.user,
+  user: null,
   currentFriendTarget: null,
   friendlist: [],
   appmode: 0,
@@ -29,7 +29,7 @@ const reducer = (state = initState, action) => {
       return {
         isFirst: true,
         token: null,
-        user: MODAL.user,
+        user: null,
         currentFriendTarget: null,
         friendlist: [],
         appmode: 0,
