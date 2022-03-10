@@ -1,3 +1,8 @@
+
+export const ENUM_TYPE_QRCODE={
+  porsioningview:"porsioningview"
+}
+
 class Constants {
   static COPYRIGHT = 'Copyright © EDPMP 2019';
   static NAME_APPS = 'EDPMP';

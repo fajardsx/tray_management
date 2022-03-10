@@ -42,3 +42,37 @@ export async function OnLoginPost(post=null) {
   }
 }
 //
+export async function OnGetPorsioning(post="") {
+  try {
+    const additionalHeaders = {
+      Accept: "application/json",
+      "cache-control": "no-cache",
+      "Content-Type": "multipart/form-data",
+    };
+    console.log("OnLoginPost => post  ", post);
+    const uri = RESTKEY.API.getporsining+post;
+    const envApi = baseUrl || "";
+    const url = uri.includes(envApi) ? uri : `${envApi}${uri}`;
+    let result = await fetch(url,{
+      method:Constant.G,
+      headers:additionalHeaders,
+      //body:post
+    })
+    result = result.json();
+    if(result){
+      return result;
+    }else{
+      return null;
+    }
+  } catch (error) {
+    if (error.response.status && error.response.status === 401) {
+      return null;
+    }
+    if (error.response && error.response.data) {
+      throw error.response.data;
+    }
+    console.error('error not defined', error)
+    return null;
+  }
+}
+//

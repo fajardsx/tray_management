@@ -54,30 +54,42 @@ const cuteliselist = [
     count: 0,
   },
 ];
-export class TraySetScreen extends Component {
+class TraySetScreen extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      dataPatient:null,
+      dataMenu:[],
       datas: foodlist,
       datasCutelies: cuteliselist,
+      
     };
   }
-
+  componentDidMount(){
+    let data = this.props.navigation.getParam('data',null);
+    if(data != null){
+      console.log("TraySetScreen => data ",data);
+      this.setState({
+        dataPatient:data.patient,
+        dataMenu:data.menu,
+      })
+    }
+  }
   //EVENT
   toQrCode() {
     this.props.navigation.navigate(KEY_ROUTE.QR_SCREEN);
   }
   updateCheck(id) {
-    const {datas} = this.state;
-    let currentdata = datas.findIndex(res => {
-      return res.id == id;
+    const {dataMenu} = this.state;
+    let currentdata = dataMenu.findIndex(res => {
+      return res.code == id;
     });
 
     if (currentdata > -1) {
-      let tempdata = Object.assign([], datas);
+      let tempdata = Object.assign([], dataMenu);
       tempdata[currentdata].isCheck = !tempdata[currentdata].isCheck;
-      this.setState({datas: tempdata});
+      this.setState({dataMenu: tempdata});
     }
   }
   updateCutelies(id, updateCount) {
@@ -103,40 +115,44 @@ export class TraySetScreen extends Component {
         <ScrollView
           style={{flex: 1, marginBottom: moderateScale(30)}}
           contentContainerStyle={{flexGrow: 2}}>
-          <View style={{paddingVertical: 5}}>
+          <View style={{paddingVertical: 5,width:convertWidth(100)}}>
             <Text
               style={{
                 backgroundColor: colors.main.COLOR_PRIMARY_2,
                 fontSize: moderateScale(15),
                 color: colors.textcolor.COLOR_TEXT_1,
                 marginTop: 10,
-                paddingLeft: moderateScale(10),
+                paddingLeft: 20,
                 paddingVertical: moderateScale(7),
               }}>
-              {'Date :' + formatDate(new Date())}
+              {'Date : ' + formatDate(new Date())}
             </Text>
           </View>
-          <View style={{marginTop: moderateScale(10), paddingHorizontal: 10}}>
-            {this.renderForm('Nama Pasien :', 'Hendra [L] Herbron - 34')}
+          <View style={{marginTop: moderateScale(10), paddingHorizontal: 10,alignItems:'center'}}>
+            {this.state.dataPatient != null && this.patientView(this.state.dataPatient)}
             <Text
               style={{
+                width:"90%",
                 backgroundColor: colors.main.COLOR_PRIMARY_2,
                 fontSize: moderateScale(15),
                 color: colors.textcolor.COLOR_TEXT_1,
                 marginTop: 10,
+                paddingLeft:10,
                 paddingVertical: moderateScale(5),
               }}>
               {'Menu :'}
             </Text>
-            {datas.map((res, index) => {
+            {this.state.dataMenu.map((res, index) => {
               return this.renderCheckListItem(res);
             })}
             <Text
               style={{
+                width:"90%",
                 backgroundColor: colors.main.COLOR_PRIMARY_2,
                 fontSize: moderateScale(15),
                 color: colors.textcolor.COLOR_TEXT_1,
                 marginTop: 10,
+                paddingLeft:10,
                 paddingVertical: moderateScale(5),
               }}>
               {'Cutelies :'}
@@ -145,6 +161,7 @@ export class TraySetScreen extends Component {
               return this.renderCutlistItem(res);
             })}
           </View>
+
           <View style={{flexDirection: 'row', paddingVertical: 10}}>
             <View
               style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
@@ -204,19 +221,20 @@ export class TraySetScreen extends Component {
     );
   }
 
-  renderForm = (title, value) => (
-    <View>
+  patientView = (value) => (
+    <View style={{width:"90%"}}>
       <Text
         style={{
           paddingVertical: moderateScale(5),
+          paddingLeft:10,
           backgroundColor: colors.main.COLOR_PRIMARY_2,
           color: colors.textcolor.COLOR_TEXT_1,
           fontSize: moderateScale(15),
         }}>
-        {title}
+        {"Nama Pasien : "}
       </Text>
-      <Text style={{fontSize: moderateScale(19), borderBottomWidth: 0.5}}>
-        {value}
+      <Text style={{fontSize: moderateScale(19), borderBottomWidth: 0.5, paddingLeft:10,}}>
+        {`${value.name} - ${value.room} `}
       </Text>
     </View>
   );
@@ -224,14 +242,15 @@ export class TraySetScreen extends Component {
     <View
       style={{
         flexDirection: 'row',
-        width: '100%',
+        width: '90%',
         paddingVertical: moderateScale(10),
         justifyContent: 'space-between',
+        paddingLeft:10,
         borderBottomWidth: 0.5,
       }}>
-      <Text style={{fontSize: moderateScale(19)}}>{data.title}</Text>
+      <Text style={{fontSize: 18}}>{data.name}</Text>
       <TouchableOpacity
-        onPress={() => this.updateCheck(data.id)}
+        onPress={() => this.updateCheck(data.code)}
         style={{
           borderWidth: 2,
           width: moderateScale(30),
@@ -256,7 +275,8 @@ export class TraySetScreen extends Component {
     <View
       style={{
         flexDirection: 'row',
-        width: '100%',
+        width: '90%',
+        paddingLeft:10,
         paddingVertical: moderateScale(10),
         justifyContent: 'space-between',
         borderBottomWidth: 0.5,

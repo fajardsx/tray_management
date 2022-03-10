@@ -9,7 +9,7 @@ import {
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {styles, colors} from '../../styles';
-import Constants from '../../config/constant';
+import Constants, { ENUM_TYPE_QRCODE } from '../../config/constant';
 import {moderateScale} from '../../styles/scaling';
 import Buttons from '../../components/Buttons';
 import {convertWidth} from '../../config/utils';
@@ -17,8 +17,9 @@ import KEY_ROUTE from './../../route/keyroute';
 import Headers, {Subtitles} from '../../components/Headers';
 import Iconqr from '../../assets/images/icons/qricon.svg';
 import Forminput from '../../components/Forminput';
+import { OnGetPorsioning } from '../../services/ApiController';
 
-export class PorsioningScreen extends Component {
+class PorsioningScreen extends Component {
   constructor(props) {
     super(props);
 
@@ -27,18 +28,39 @@ export class PorsioningScreen extends Component {
       searchmrtxt: '',
     };
   }
-
+  componentDidMount(){
+    this.init()
+  }
+  //INIT
+  init(){
+    //this.onGetList();
+  }
   //EVENT
   onChangeInput = text => {
     this.setState({searchmrtxt: text});
   };
   toQrCode() {
-    //this.props.navigation.navigate(KEY_ROUTE.QR_SCREEN);
-    this.props.navigation.navigate(KEY_ROUTE.TRAYSET_SCREEN);
+    this.props.navigation.navigate(KEY_ROUTE.QR_SCREEN,{type:ENUM_TYPE_QRCODE.porsioningview});
+    //
+  }
+  
+  onSubmitData=()=>{
+    this.onGetList();
   }
   onDone(data) {}
   //API
-
+  async onGetList(){
+    try {
+        let body = this.state.searchmrtxt.length>0? this.state.searchmrtxt.length:"76687"
+        let result = await OnGetPorsioning(body);
+        console.log("PorsioningScreen => onGetList => result ",result)
+        if(result != null && result.api_message == "success"){
+          this.props.navigation.navigate(KEY_ROUTE.TRAYSET_SCREEN,{data:result.data});
+        }
+    } catch (error) {
+      console.log("PorsioningScreen => onGetList => error ",error)
+    }
+  }
   //RENDER
   render() {
     const {searchmrtxt} = this.state;
@@ -106,7 +128,7 @@ export class PorsioningScreen extends Component {
             backgroundColor: colors.main.COLOR_PRIMARY_2,
             marginTop: moderateScale(100),
           }}
-          onPressButton={this.toQrCode.bind(this)}>
+          onPressButton={this.onSubmitData.bind(this)}>
           <Text
             style={{
               color: colors.textcolor.COLOR_TEXT_1,
