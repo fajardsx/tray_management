@@ -104,6 +104,12 @@ class TraySetScreen extends Component {
       this.setState({datasCutelies: tempdata});
     }
   }
+  onPressSubmit=()=>{
+
+  }
+  onPressCancel=()=>{
+    this.props.navigation.goBack();
+  }
   //API
 
   //RENDER
@@ -163,7 +169,7 @@ class TraySetScreen extends Component {
           </View>
 
           <View style={{flexDirection: 'row', paddingVertical: 10}}>
-            <View
+            {/* <View
               style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
               <Text style={{fontSize: moderateScale(19)}}>Troley</Text>
               <Buttons
@@ -178,7 +184,7 @@ class TraySetScreen extends Component {
                 <Iconqr width={moderateScale(25)} height={moderateScale(25)} />
                 <Text>Scan</Text>
               </Buttons>
-            </View>
+            </View> */}
             <View
               style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
               <Text style={{fontSize: moderateScale(19)}}>Rack</Text>
@@ -189,7 +195,7 @@ class TraySetScreen extends Component {
                   flexDirection: 'row',
                   justifyContent: 'space-around',
                 }}
-                //onPressButton={this.toQrCode.bind(this)}
+                onPressButton={this.toQrCode.bind(this)}
               >
                 <Iconqr width={moderateScale(25)} height={moderateScale(25)} />
                 <Text>Scan</Text>
@@ -202,7 +208,7 @@ class TraySetScreen extends Component {
                 width: convertWidth(80),
                 marginTop: 50,
               }}
-              //onPressButton={this.onTryLogin.bind(this)}
+              onPressButton={this.onPressSubmit}
             >
               <Text>Done</Text>
             </Buttons>
@@ -211,7 +217,7 @@ class TraySetScreen extends Component {
                 width: convertWidth(80),
                 marginTop: 10,
               }}
-              //onPressButton={this.onTryLogin.bind(this)}
+              onPressButton={this.onPressCancel}
             >
               <Text>Cancel</Text>
             </Buttons>

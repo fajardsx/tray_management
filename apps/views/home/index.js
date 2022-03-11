@@ -25,6 +25,7 @@ import IconPickup from '../../assets/images/icons/pickupicon.svg';
 import Forminput from '../../components/Forminput';
 
 import Iconqr from '../../assets/images/icons/qricon.svg';
+import { OnPorsioning } from '../../services/ApiController';
 const btnlist = [
   {
     id: 0,
@@ -52,7 +53,14 @@ export class HomeScreen extends Component {
       searchmrtxt: '',
     };
   }
-
+  componentDidMount(){
+    this.init()
+  }
+  //
+  async init(){
+    let data = await OnPorsioning();
+    //console.log("HomeScreen => init ",data)
+  }
   //EVENT
   onChangeInput = text => {
     this.setState({searchmrtxt: text});
@@ -79,9 +87,10 @@ export class HomeScreen extends Component {
     const {searchmrtxt} = this.state;
     return (
       <SafeAreaView style={styles.containerDimension}>
+       <Headers />
         <KeyboardAvoidingView behavior={'position'}>
-          <Headers />
-          <View style={{marginTop: moderateScale(20)}}>
+         
+          <View style={{marginTop: 25}}>
             <FlatList
               numColumns={2}
               extraData={this.state}
@@ -91,7 +100,7 @@ export class HomeScreen extends Component {
                 return index.toString();
               }}
             />
-            <View style={{marginTop: '10%', alignItems: 'center'}}>
+            {/* <View style={{marginTop: '10%', alignItems: 'center'}}>
               <Buttons
                 style={{
                   width: convertWidth(80),
@@ -117,7 +126,7 @@ export class HomeScreen extends Component {
                 }}
                 placeholder={'Search MR'}
               />
-            </View>
+            </View> */}
           </View>
         </KeyboardAvoidingView>
       </SafeAreaView>
@@ -165,11 +174,12 @@ export class HomeScreen extends Component {
       <TouchableOpacity
         onPress={() => this.toScreen(index)}
         style={{
-          borderWidth: 5,
+          borderWidth: 2,
           borderColor: colors.main.COLOR_PRIMARY_6,
           margin: 5,
           borderRadius: 10,
           overflow: 'hidden',
+          elevation:3
         }}>
         <View
           style={{
